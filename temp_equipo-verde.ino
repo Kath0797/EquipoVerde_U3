@@ -1,7 +1,11 @@
+#include <ESP8266HTTPClient.h>
+#include <ESP8266WiFi.h>
+#include <ArduinoJson.h>
+
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-const char* ssid = "GALAXY A7 2017";
+const char* ssid = "Galaxy A7 2017";
 const char* password = "123456789";
  
 #define DS18B20 D2
@@ -48,11 +52,11 @@ void loop(){
     Serial.println("");
   }
 
-  String server = "http://192.168.1.118/api/temperatura-corporal";
+  String server = "http://192.168.43.184:5045/proyecto/agregarTemperatura";
 
   StaticJsonBuffer<300> jsonBuffer;
   JsonObject& JSONencoder = jsonBuffer.createObject();
-  JSONencoder["temperatura"] = temp;
+  JSONencoder["Temp"] = temp;
 
   char JSONmessageBuffer[256];
   JSONencoder.prettyPrintTo(JSONmessageBuffer, sizeof(JSONmessageBuffer));
